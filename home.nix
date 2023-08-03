@@ -52,6 +52,7 @@ let-env config = {
       userEmail = "leomundspedoske@gmail.com";
       userName = "Spedoske";
     };
+    gitui.enable = true;
   };
 
   # The home.packages option allows you to install Nix packages into your
