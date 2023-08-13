@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
 
-{
+let homeDirectory = if pkgs.system == "aarch64-darwin" then "/Users/kashun" else "/home/kashun";
+    isDesktop = pkgs.system == "aarch64-darwin";
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "kashun";
-  home.homeDirectory = "/home/kashun";
+  home.homeDirectory = homeDirectory;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -16,35 +18,62 @@
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   programs = {
+    alacritty = {
+      enable = isDesktop;
+      settings = {
+        shell = {
+          program = "/bin/zsh";
+          args = [ "--login" "-i" "-c" "/Users/kashun/.nix-profile/bin/nu" ];
+        };
+        font = {
+          size = 15;
+          normal = {
+            family = "HackGen Console NF";
+            style = "Regular";
+          };
+          bold = {
+            family = "HackGen Console NF";
+            style = "Bold";
+          };
+        };
+      };
+    };
+    vscode = {
+      enable = isDesktop;
+      extensions = with pkgs.vscode-extensions; [
+        rust-lang.rust-analyzer
+      ];
+    };
     nushell = {
       enable = true;
       configFile.text = ''
-let-env PATH = (if (($env.PATH | describe) == "string") { $env.PATH | split row ":" } else { $env.PATH } | prepend "/home/kashun/.config/carapace/bin")
+$env.PATH = if (($env.PATH | describe) == "string") { $env.PATH | split row ":" } else { $env.PATH }
 
 let carapace_completer = {|spans| 
   carapace $spans.0 nushell $spans | from json
 }
 
-let-env config = {
-  completions: {
-    external: {
-      enable: true
-      completer: $carapace_completer
-    }
-  }
-}
+mut current = (($env | default {} config).config | default {} completions)
+$current.completions = ($current.completions | default {} external)
+$current.completions.external = ($current.completions.external 
+    | default true enable
+    | default $carapace_completer completer)
+
+$env.config = $current
 '';
     };
     bash = {
       enable = true;
       profileExtra = "${pkgs.nushell + "/bin/nu"}";
     };
+    helix = {
+      enable = true;
+      defaultEditor = true;
+    };
     starship = {
       enable = true;
       # Configuration written to ~/.config/starship.toml
-      settings = {
-
-      };
+      settings = builtins.fromTOML (builtins.readFile (builtins.fetchurl "https://raw.githubusercontent.com/VictorPLopes/starship/master/docs/.vuepress/public/presets/toml/tokyo-night.toml"));
     };
     bat.enable = true;
     git = {
@@ -63,6 +92,10 @@ let-env config = {
     # pkgs.hello
     tealdeer
     carapace
+    rust-bin.nightly."2023-08-13".default
+    rust-analyzer
+    nil
+    lldb
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -76,7 +109,14 @@ let-env config = {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-  ];
+  ] ++ (if isDesktop then with pkgs.jetbrains; [
+    clion
+    datagrip
+    gateway
+    goland
+    pycharm-professional
+    webstorm
+  ] else []);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
