@@ -2,6 +2,7 @@
 
 let homeDirectory = if pkgs.system == "aarch64-darwin" then "/Users/kashun" else "/home/kashun";
     isDesktop = pkgs.system == "aarch64-darwin";
+    isDev = pkgs.system == "aarch64-darwin";
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -69,6 +70,18 @@ $env.config = $current
     helix = {
       enable = true;
       defaultEditor = true;
+      package = pkgs.helix.overrideAttrs (oldAttrs: rec {
+        src = pkgs.fetchzip {
+          url = "https://github.com/Spedoske/helix/releases/download/23.06/helix-23.06-source.tar.xz";
+          hash = "sha256-LcXGbw4EQqLarC9oxoEuNBat8+ehsB6LtHmF73qR0HQ=";
+          stripRoot = false;
+        };
+        cargoDeps = oldAttrs.cargoDeps.overrideAttrs (pkgs.lib.const {
+          name = "${oldAttrs.pname}-vendor.tar.gz";
+          inherit src;
+          outputHash = "sha256-kpiUCH5ov33pgvVXzdlD89GSxHYuG+2mQ0YKILXQltM=";
+        });
+      });
     };
     starship = {
       enable = true;
@@ -92,10 +105,8 @@ $env.config = $current
     # pkgs.hello
     tealdeer
     carapace
-    rust-bin.nightly."2023-08-13".default
-    rust-analyzer
     nil
-    lldb
+    iftop
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -116,6 +127,10 @@ $env.config = $current
     goland
     pycharm-professional
     webstorm
+  ] else []) ++ (if isDev then with pkgs; [
+    rust-bin.nightly."2023-08-13".default
+    rust-analyzer
+    lldb
   ] else []);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
