@@ -39,6 +39,7 @@ in {
         };
       };
     };
+    zellij.enable = true;
     vscode = {
       enable = isDesktop;
       extensions = with pkgs.vscode-extensions; [
@@ -107,7 +108,7 @@ $env.config = $current
     carapace
     nil
     iftop
-
+    neofetch
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
