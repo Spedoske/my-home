@@ -24,7 +24,7 @@ in {
       settings = {
         shell = {
           program = "/bin/zsh";
-          args = [ "--login" "-i" "-c" "/Users/kashun/.nix-profile/bin/nu" ];
+          args = [ "--login" "-i" "-c" "${homeDirectory}/.nix-profile/bin/zellij" ];
         };
         font = {
           size = 15;
@@ -39,7 +39,12 @@ in {
         };
       };
     };
-    zellij.enable = true;
+    zellij = {
+      enable = true;
+      settings = {
+        default_shell = "${homeDirectory}/.nix-profile/bin/nu";
+      };
+    };
     vscode = {
       enable = isDesktop;
       extensions = with pkgs.vscode-extensions; [
