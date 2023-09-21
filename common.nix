@@ -58,5 +58,6 @@
     nil
     neofetch
     htop
+    asciinema
   ];
 }
