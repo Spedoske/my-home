@@ -59,5 +59,6 @@
     neofetch
     htop
     asciinema
+    asciinema-agg
   ];
 }
