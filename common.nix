@@ -23,6 +23,7 @@
             | default $carapace_completer completer)
 
         $env.config = $current
+        $env.config.show_banner = false
       '';
     };
     bash = {
@@ -53,6 +54,8 @@
     };
   };
   home.packages = with pkgs; [
+    # custom fonts for spaceship
+    nerdfonts
     tealdeer
     carapace
     nil
