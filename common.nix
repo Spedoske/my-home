@@ -45,8 +45,8 @@
     bat.enable = true;
     git = {
       enable = true;
-      userEmail = username;
-      userName = email;
+      userEmail = email;
+      userName = username;
     };
     gitui.enable = true;
     direnv = {
@@ -63,5 +63,8 @@
     htop
     asciinema
     asciinema-agg
+    gh
+    netmaker
+    wget
   ];
 }

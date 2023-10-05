@@ -27,6 +27,7 @@ if !isDev then { } else
     pkg-config
     opencv
     utm
+    cmake
     python3
     poetry
     nodejs
