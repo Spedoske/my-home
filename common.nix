@@ -66,5 +66,6 @@
     gh
     netmaker
     wget
+    diskonaut
   ];
 }
