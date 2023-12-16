@@ -15,6 +15,7 @@ if !isDev then { } else
     gateway
     goland
     pycharm-professional
+    idea-ultimate
     webstorm
     ruby-mine
   ] ++ (with pkgs; [
@@ -28,7 +29,8 @@ if !isDev then { } else
     opencv
     utm
     cmake
-    python3
+    python311
+    jdk17
     poetry
     nodejs
     nodejs.pkgs.pnpm
