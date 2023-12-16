@@ -64,7 +64,6 @@
     asciinema
     asciinema-agg
     gh
-    netmaker
     wget
     diskonaut
   ];

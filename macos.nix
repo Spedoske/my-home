@@ -3,7 +3,7 @@ if system == "aarch64-darwin" then { } else
 {
   programs = {
     alacritty = {
-      enable = isDesktop; 
+      enable = isDesktop;
       settings = {
         shell = {
           program = "/bin/zsh";

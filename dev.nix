@@ -17,7 +17,6 @@ if !isDev then { } else
     pycharm-professional
     idea-ultimate
     webstorm
-    ruby-mine
   ] ++ (with pkgs; [
     (rust-bin.nightly."2023-08-13".default.override {
       extensions = [ "rust-src" "rust-std" ];
@@ -26,7 +25,6 @@ if !isDev then { } else
     lldb
     protobuf
     pkg-config
-    opencv
     utm
     cmake
     python311
@@ -35,19 +33,5 @@ if !isDev then { } else
     nodejs
     nodejs.pkgs.pnpm
     marksman
-    ocaml
-    dune_3
-    julia-bin
-    ocamlPackages.seq
-    ocamlPackages.stdlib-shims
-    ocamlPackages.findlib
-    ocamlPackages.core
-    ocamlPackages.core_extended
-    ocamlPackages.batteries
-    ocamlPackages.ocaml-lsp
-    ocamlPackages.ounit2
-    ocamlPackages.utop
-    ocamlPackages.ocamlformat-rpc-lib
-    cachix
   ]);
 }
