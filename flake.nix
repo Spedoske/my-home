@@ -6,11 +6,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mac-app-util.url = "github:hraban/mac-app-util";
     flake-utils.url = "github:numtide/flake-utils";
     rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { nixpkgs, home-manager, flake-utils, rust-overlay, ... }:
+  outputs = { nixpkgs, home-manager, mac-app-util, flake-utils, rust-overlay, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         userConfig = (import ./config.nix { inherit system; });
@@ -33,7 +34,9 @@
         baseConfig = modules: home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           inherit modules;
-          extraSpecialArgs = (import ./config.nix { inherit system; });
+          extraSpecialArgs = (import ./config.nix { inherit system; }) // {
+            mac-app-util = mac-app-util.packages.${system}.default;
+          };
         };
       in
       {

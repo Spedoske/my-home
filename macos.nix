@@ -1,6 +1,13 @@
-{ pkgs, system, isDesktop, homeDirectory, ... }:
-if system == "aarch64-darwin" then { } else
+{ lib, pkgs, system, isDesktop, homeDirectory, mac-app-util, ... }:
+if system != "aarch64-darwin" then { } else
 {
+  home.activation = {
+    trampolineApps = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      fromDir="$HOME/Applications/Home Manager Apps"
+      toDir="$HOME/Applications/Home Manager Trampolines"
+      ${mac-app-util}/bin/mac-app-util sync-trampolines "$fromDir" "$toDir"
+    '';
+  };
   programs = {
     alacritty = {
       enable = isDesktop;
