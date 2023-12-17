@@ -55,7 +55,7 @@
   };
   home.packages = with pkgs; [
     # custom fonts for spaceship
-    nerdfonts
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     tealdeer
     carapace
     nil

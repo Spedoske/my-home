@@ -19,12 +19,8 @@ if system != "aarch64-darwin" then { } else
         font = {
           size = 15;
           normal = {
-            family = "HackGen Console NF";
+            family = "JetBrainsMono Nerd Font";
             style = "Regular";
-          };
-          bold = {
-            family = "HackGen Console NF";
-            style = "Bold";
           };
         };
       };
