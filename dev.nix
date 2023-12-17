@@ -1,4 +1,4 @@
-{ pkgs, isDev, isDesktop, ... }:
+{ pkgs, isDev, isDesktop, fontFamily, ... }:
 if !isDev then { } else
 {
   programs = {
@@ -7,6 +7,9 @@ if !isDev then { } else
       extensions = with pkgs.vscode-extensions; [
         rust-lang.rust-analyzer
       ];
+      userSettings = {
+        "terminal.integrated.fontFamily" = fontFamily;
+      };
     };
   };
   home.packages = with pkgs.jetbrains; [

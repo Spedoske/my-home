@@ -8,4 +8,5 @@
   isDesktop = system == "aarch64-darwin";
   isDev = system == "aarch64-darwin";
   isDesign = system == "aarch64-darwin";
+  fontFamily = "JetBrainsMono Nerd Font";
 }

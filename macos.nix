@@ -1,4 +1,4 @@
-{ lib, pkgs, system, isDesktop, homeDirectory, mac-app-util, ... }:
+{ lib, pkgs, system, isDesktop, homeDirectory, fontFamily, mac-app-util, ... }:
 if system != "aarch64-darwin" then { } else
 {
   home.activation = {
@@ -19,7 +19,7 @@ if system != "aarch64-darwin" then { } else
         font = {
           size = 15;
           normal = {
-            family = "JetBrainsMono Nerd Font";
+            family = fontFamily;
             style = "Regular";
           };
         };
