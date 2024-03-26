@@ -10,20 +10,12 @@
     nushell = {
       enable = true;
       configFile.text = ''
-        $env.PATH = if (($env.PATH | describe) == "string") { $env.PATH | split row ":" } else { $env.PATH }
-
-        let carapace_completer = {|spans|
-          carapace $spans.0 nushell $spans | from json
-        }
-
-        mut current = (($env | default {} config).config | default {} completions)
-        $current.completions = ($current.completions | default {} external)
-        $current.completions.external = ($current.completions.external
-            | default true enable
-            | default $carapace_completer completer)
-
-        $env.config = $current
-        $env.config.show_banner = false
+        source ~/.cache/carapace/init.nu
+      '';
+      envFile.text = ''
+        $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+        mkdir ~/.cache/carapace
+        carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
       '';
     };
     bash = {
@@ -45,8 +37,8 @@
     bat.enable = true;
     git = {
       enable = true;
-      userEmail = email;
-      userName = username;
+      userEmail = "leomundspedoske@gmail.com";
+      userName = "Spedoske";
     };
     gitui.enable = true;
     direnv = {

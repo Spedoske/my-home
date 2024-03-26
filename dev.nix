@@ -20,6 +20,7 @@ if !isDev then { } else
     pycharm-professional
     idea-ultimate
     webstorm
+    rider
   ] ++ (with pkgs; [
     (rust-bin.nightly."2023-08-13".default.override {
       extensions = [ "rust-src" "rust-std" ];
@@ -29,6 +30,7 @@ if !isDev then { } else
     protobuf
     pkg-config
     utm
+    act
     cmake
     python311
     jdk17
