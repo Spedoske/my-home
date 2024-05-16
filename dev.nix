@@ -21,8 +21,9 @@ if !isDev then { } else
     idea-ultimate
     webstorm
     rider
+    rust-rover
   ] ++ (with pkgs; [
-    (rust-bin.nightly."2023-08-13".default.override {
+    (rust-bin.nightly."2024-01-30".default.override {
       extensions = [ "rust-src" "rust-std" ];
     })
     rust-analyzer
@@ -38,5 +39,7 @@ if !isDev then { } else
     nodejs
     nodejs.pkgs.pnpm
     marksman
+    erlang
+    elixir
   ]);
 }
