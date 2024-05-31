@@ -37,7 +37,7 @@ if !isDev then { } else
     jdk17
     poetry
     nodejs
-    nodejs.pkgs.pnpm
+    corepack
     marksman
     erlang
     elixir

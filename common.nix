@@ -39,6 +39,7 @@
       enable = true;
       userEmail = "leomundspedoske@gmail.com";
       userName = "Spedoske";
+      lfs.enable = true;
     };
     gitui.enable = true;
     direnv = {
