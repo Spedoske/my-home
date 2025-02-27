@@ -12,7 +12,7 @@ if system != "aarch64-darwin" then { } else
     alacritty = {
       enable = isDesktop;
       settings = {
-        shell = {
+        terminal.shell = {
           program = "/bin/zsh";
           args = [ "--login" "-i" "-c" "${homeDirectory}/.nix-profile/bin/zellij" ];
         };

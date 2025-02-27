@@ -1,11 +1,14 @@
 { pkgs, homeDirectory, username, email, ... }:
 {
-  programs = {
+  programs = rec {
     zellij = {
       enable = true;
       settings = {
         default_shell = "${homeDirectory}/.nix-profile/bin/nu";
       };
+    };
+    atuin = {
+      enable = true;
     };
     nushell = {
       enable = true;
@@ -20,8 +23,12 @@
     };
     bash = {
       enable = true;
-      profileExtra = "${pkgs.nushell + "/bin/nu"}";
+      profileExtra = ''
+        source $HOME/.cargo/env
+        source $HOME/export-esp.sh
+      '';
     };
+    zsh = bash;
     helix = {
       enable = true;
       defaultEditor = true;
@@ -37,8 +44,8 @@
     bat.enable = true;
     git = {
       enable = true;
-      userEmail = "leomundspedoske@gmail.com";
-      userName = "Spedoske";
+      userEmail = email;
+      userName = username;
       lfs.enable = true;
     };
     gitui.enable = true;
@@ -48,7 +55,7 @@
   };
   home.packages = with pkgs; [
     # custom fonts for spaceship
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
     tealdeer
     carapace
     nil
@@ -58,6 +65,6 @@
     asciinema-agg
     gh
     wget
-    diskonaut
+    wiper
   ];
 }

@@ -1,6 +1,6 @@
 { system }: {
   username = "kashun";
-  email = "kashun@berkeley.edu";
+  email = "125161677+KashunCheng@users.noreply.github.com";
 
   inherit system;
 

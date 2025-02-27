@@ -16,30 +16,34 @@ if !isDev then { } else
     clion
     datagrip
     gateway
-    goland
+#    goland
     pycharm-professional
-    idea-ultimate
+#    idea-ultimate
     webstorm
-    rider
+#    rider
     rust-rover
   ] ++ (with pkgs; [
-    (rust-bin.nightly."2024-01-30".default.override {
-      extensions = [ "rust-src" "rust-std" ];
-    })
-    rust-analyzer
+    #    (rust-bin.nightly."2024-07-01".default.override {
+    #      extensions = [ "rust-src" "rust-std" ];
+    #      targets = [ "thumbv6m-none-eabi" ];
+    #    })
+    rustup
+    #    rust-analyzer
     lldb
-    protobuf
     pkg-config
-    utm
     act
     cmake
     python311
     jdk17
     poetry
+    poetryPlugins.poetry-plugin-export
     nodejs
     corepack
     marksman
     erlang
     elixir
+    ninja
+    dfu-util
+    ccache
   ]);
 }
