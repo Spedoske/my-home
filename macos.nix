@@ -1,6 +1,7 @@
 { lib, pkgs, system, isDesktop, homeDirectory, fontFamily, mac-app-util, ... }:
 if system != "aarch64-darwin" then { } else
 {
+  home.packages = with pkgs; [ spotube ];
   home.activation = {
     trampolineApps = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       fromDir="$HOME/Applications/Home Manager Apps"

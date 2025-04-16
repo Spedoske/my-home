@@ -21,14 +21,14 @@
         carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
       '';
     };
-    bash = {
-      enable = true;
-      profileExtra = ''
-        source $HOME/.cargo/env
-        source $HOME/export-esp.sh
-      '';
-    };
-    zsh = bash;
+    # bash = {
+    #   enable = true;
+    #   profileExtra = ''
+    #     source $HOME/.cargo/env
+    #     source $HOME/export-esp.sh
+    #   '';
+    # };
+    # zsh = bash;
     helix = {
       enable = true;
       defaultEditor = true;
